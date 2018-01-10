@@ -1,19 +1,53 @@
 {
-  "name": "@nothingmore/auth",
-  "version": "0.1.0",
-  "description": "auth module for nothingmore generated apps",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@nthngmr/auth",
+  "version": "1.0.0",
+  "description": "Nothingmore Auth",
+  "main": "build/index.js",
+  "author": {
+    "name": "Your name",
+    "email": "your email"
   },
+  "homepage": "https://github.com/nthngmr/auth",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nthngmr/auth.git"
+    "url": "https://github.com/nthngmr/auth.git"
   },
-  "author": "Mark Nutter <marknutter@gmail.com>",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/nthngmr/auth/issues"
   },
-  "homepage": "https://github.com/nthngmr/auth#readme"
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux-form": "^7.2.0",
+    "redux": "^3.7.2"
+  },
+  "dependencies": {
+    "webpack": "^2.6.1",
+    "lodash": "^4.17.4",
+    "reactstrap": "^5.0.0-alpha.4",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-form": "^7.2.0"
+  },
+  "keywords": [
+    "react",
+    "react-component"
+  ]
 }
