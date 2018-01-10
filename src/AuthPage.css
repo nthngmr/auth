@@ -1,37 +1,22 @@
-.AuthPage {
-  padding-top: 50px;
-}
-
-.AuthPage .logo {
-  margin-bottom: 50px;
-}
-
-.AuthPage h1 {
-  text-align: center;
-  font-size: 40px;
-}
-
-.AuthPage .signUpLink {
+.NMAuthComponent .signUpLink {
   font-size: 12px;
 }
 
-.AuthPage .social-signing-buttons {
-  margin-left: 20px;
+.NMAuthComponent .social-signing-buttons {
+  
 }
 
-.AuthPage .emailSignIn {
-  margin-bottom: 50px;
-  /*padding-right: 0px !important;*/
+.NMAuthComponent .emailSignIn {
+  margin-bottom: 30px;
 }
 
-.AuthPage button {
+.NMAuthComponent button {
   cursor: pointer;
 }
 
-.AuthPage p.instructions {
+.NMAuthComponent p.instructions {
   text-align: center;
   text-indent: 10px;
-  color: #888;
   font-size: 13px;
   margin-bottom: 10px;
 }

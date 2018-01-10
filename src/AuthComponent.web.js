@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, ButtonGroup } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import './AuthPage.css';
 
 let SigninFormBase = props => {
   const { 
@@ -61,12 +62,12 @@ let SigninFormBase = props => {
   )
 
     return (
-      <div>
+      <div className="NMAuthComponent">
         {emailSignIn}
         <Row>
           <Col md="1"></Col>
           <Col md="10" className="socialSignin justify-content-md-center">
-            <p className="instructions">Sign in with social media</p>   
+            <p className="instructions">or continue with</p>   
             <ButtonGroup className="social-signing-buttons">
               <Button size="sm" color="primary" onClick={signInWithGoogle}>Google</Button>{' '}
               <Button size="sm" color="primary" disabled={true}>Facebook</Button>{' '}
@@ -80,7 +81,6 @@ let SigninFormBase = props => {
 }
 
 const SigninForm = reduxForm({
-  // a unique name for the form
   form: 'signIn'
 })(SigninFormBase)
 

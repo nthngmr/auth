@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import * as actions from './auth-actions';
+import * as authActions from './auth-actions';
 import AuthComponent from './AuthComponent.web';
-import reducer from './auth-reducer';
+import authReducer from './auth-reducer';
+import firebase from './firebase';
 
+export const reducer = authReducer;
 
-export const auth = reducer;
-export const authActions = actions;
+export const actions = authActions;
+
+export const setFirebase = firebase;
 
 export const NMAuthComponent = connect((state) => ({
   auth: state.auth,
@@ -17,15 +20,15 @@ export const NMAuthComponent = connect((state) => ({
 (dispatch, ownProps) => ({
   dispatch,
   signInWithGoogle: () => {
-    dispatch(actions.signInWithGoogle(ownProps.firebase));
+    dispatch(actions.signInWithGoogle());
   },
   signInWithEmail: (event) => {
     event.preventDefault();
-    dispatch(actions.signInWithEmail(ownProps.firebase));
+    dispatch(actions.signInWithEmail());
   },
   signUpWithEmail: (event) => {
     event.preventDefault();
-    dispatch(actions.signUpWithEmail(ownProps.firebase));
+    dispatch(actions.signUpWithEmail());
   },
   onSignup: (show) => {
     dispatch(actions.toggleSignup(show));

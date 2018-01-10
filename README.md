@@ -19,32 +19,36 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 ## Installation
 
-The easiest way to use @nthngmr/auth is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
+The easiest way to use @nothingmore/auth is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
 
-You can also use the standalone build by including `dist/@nthngmr/auth.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
+You can also use the standalone build by including `dist/@nothingmore/auth.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
 ```
-npm install @nthngmr/auth --save
+npm install @nothingmore/auth --save
 ```
 
 
 ## Usage
 
-__EXPLAIN USAGE HERE__
 
 ```
-var NothingmoreAuth = require('@nthngmr/auth');
+import { NMAuthComponent } from '@nothingmore/auth';
 
-<NothingmoreAuth>Example</NothingmoreAuth>
+<NMAuthComponent firebase={firebase} />
 ```
 
-### Properties
 
-* __DOCUMENT PROPERTIES HERE__
+```
+import { combineReducers } from 'redux';
+import { auth } from '@nothingmore/auth';
+import { reducer as formReducer } from 'redux-form';
 
-### Notes
+export default combineReducers({
+  auth,
+  form: formReducer
+});
+```
 
-__ADDITIONAL USAGE NOTES__
 
 
 ## Development (`src`, `lib` and the build process)
