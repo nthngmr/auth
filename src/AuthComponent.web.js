@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, ButtonGroup } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 
-let SigninForm = props => {
+let SigninFormBase = props => {
   const { 
     handleSubmit, 
     signInWithGoogle, 
@@ -79,10 +79,10 @@ let SigninForm = props => {
     );
 }
 
-SigninForm = reduxForm({
+const SigninForm = reduxForm({
   // a unique name for the form
   form: 'signIn'
-})(SigninForm)
+})(SigninFormBase)
 
 export default SigninForm;
   

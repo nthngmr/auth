@@ -28,9 +28,10 @@ export const signInWithGoogle = (firebase, id) => {
   }
 }
 
-export const signInWithEmail = (firebase, email, password) => {
+export const signInWithEmail = (firebase) => {
   return (dispatch, getState) => {
-
+    let state = getState();
+    const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
       const user = {
         displayName: result.displayName,
@@ -65,9 +66,10 @@ export const toggleSignup = (show) => {
   }
 }
 
-export const signUpWithEmail = (firebase, email, password, passwordConfirmation) => {
+export const signUpWithEmail = (firebase) => {
   return (dispatch, getState) => {
-
+    let state = getState();
+    const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
       return saveUserInfo(result.user).then(() => {
         return dispatch({
