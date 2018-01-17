@@ -1,6 +1,6 @@
 {
   "name": "@nothingmore/auth",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Nothingmore Auth",
   "main": "src/index.js",
   "author": {
