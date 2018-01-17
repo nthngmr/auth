@@ -2,10 +2,10 @@
   "name": "@nothingmore/auth",
   "version": "1.0.5",
   "description": "Nothingmore Auth",
-  "main": "build/index.js",
+  "main": "src/index.js",
   "author": {
-    "name": "Your name",
-    "email": "your email"
+    "name": "Mark Nutter",
+    "email": "marknutter@gmail.com"
   },
   "homepage": "https://github.com/nthngmr/auth",
   "repository": {
@@ -23,10 +23,10 @@
     "redux": "*",
     "lodash": "*",
     "reactstrap": "^5.0.0-alpha.4",
-    "redux-thunk": "*"
-  },
-  "dependencies": {
-    "webpack": "^2.6.1"
+    "redux-thunk": "*",
+    "native-base": "^2.3.5",
+    "react-native": "^0.52.0",
+    "@expo/vector-icons": "^6.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -43,18 +43,29 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.5.1",
+    "babel-preset-react-native": "^4.0.0",
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
+    "json-loader": "^0.5.7",
+    "native-base": "^2.3.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-native": "^0.52.0",
+    "react-native-clean-form": "^0.5.0",
+    "react-native-vector-icons": "^4.5.0",
+    "react-native-webpack": "^0.1.1",
     "react-redux": "^5.0.6",
     "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.7.2",
     "redux-form": "^7.2.0",
     "style-loader": "^0.19.1",
-    "supports-color": "^5.1.0"
+    "supports-color": "^5.1.0",
+    "webpack-dev-server": "^2.11.0",
+    "webpack": "^2.6.1"
   },
   "keywords": [
     "react",
     "react-component"
-  ]
+  ],
+  "dependencies": {}
 }

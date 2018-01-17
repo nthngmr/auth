@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, ButtonGroup } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
-import './AuthPage.css';
+// import './AuthPage.css';
 
 let SigninFormBase = props => {
-  const { 
-    handleSubmit, 
-    signInWithGoogle, 
-    signUpWithEmail, 
+  const {
+    handleSubmit,
+    signInWithGoogle,
+    signUpWithEmail,
     signInWithEmail,
     onSignUp,
     showSignup
@@ -67,7 +67,7 @@ let SigninFormBase = props => {
         <Row>
           <Col md="1"></Col>
           <Col md="10" className="socialSignin justify-content-md-center">
-            <p className="instructions">or continue with</p>   
+            <p className="instructions">or continue with</p>
             <ButtonGroup className="social-signing-buttons">
               <Button size="sm" color="primary" onClick={signInWithGoogle}>Google</Button>{' '}
               <Button size="sm" color="primary" disabled={true}>Facebook</Button>{' '}
@@ -85,4 +85,3 @@ const SigninForm = reduxForm({
 })(SigninFormBase)
 
 export default SigninForm;
-  
