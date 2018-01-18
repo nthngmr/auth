@@ -1,57 +1,61 @@
-import _ from 'lodash';
-import {
-  HANDLE_SIGNED_IN,
-  HANDLE_SIGNED_OUT,
-  HANDLE_SIGNING_OUT,
-  SIGN_IN_WITH_GOOGLE,
-  HANDLE_SIGN_IN_FAILURE,
-  TOGGLE_SIGNUP
-} from './actions';
+'use strict';
 
-const initialState = {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _actions = require('./actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
   status: 'pending',
   showSignup: false
-}
+};
 
-const authReducer = (state = initialState, action) => {
+var authReducer = function authReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
   switch (action.type) {
-    case SIGN_IN_WITH_GOOGLE:
-      return {
-        ...state,
+    case _actions.SIGN_IN_WITH_GOOGLE:
+      return _extends({}, state, {
         status: 'pending'
-      };
-    case HANDLE_SIGNED_IN:
-      return {
-        ...state,
+      });
+    case _actions.HANDLE_SIGNED_IN:
+      return _extends({}, state, {
         status: 'authenticated',
         token: action.token,
         user: action.user
-      };
-    case HANDLE_SIGNING_OUT:
-      return {
-        ...state,
+      });
+    case _actions.HANDLE_SIGNING_OUT:
+      return _extends({}, state, {
         status: 'pending'
-      };
-    case HANDLE_SIGNED_OUT:
+      });
+    case _actions.HANDLE_SIGNED_OUT:
       return {
         status: 'unauthenticated'
       };
-    case HANDLE_SIGN_IN_FAILURE:
-      return {
-        ...state,
+    case _actions.HANDLE_SIGN_IN_FAILURE:
+      return _extends({}, state, {
         status: 'unauthenticated',
         type: 'HANDLE_SIGN_IN_FAILURE',
         error: action.error,
         provider: action.provider
-      }
-    case TOGGLE_SIGNUP:
-      return {
-        ...state,
+      });
+    case _actions.TOGGLE_SIGNUP:
+      return _extends({}, state, {
         showSignup: action.show
-      }
+      });
     default:
       return state;
   }
-}
+};
 
-export default authReducer;
+exports.default = authReducer;

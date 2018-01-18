@@ -1,0 +1,22 @@
+.NMAuthComponent .signUpLink {
+  font-size: 12px;
+}
+
+.NMAuthComponent .social-signing-buttons {
+
+}
+
+.NMAuthComponent .emailSignIn {
+  margin-bottom: 30px;
+}
+
+.NMAuthComponent button {
+  cursor: pointer;
+}
+
+.NMAuthComponent p.instructions {
+  text-align: center;
+  text-indent: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}

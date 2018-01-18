@@ -30,19 +30,20 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && webpack --watch",
-    "build": "webpack",
-    "publish-patch": "npm version patch && npm publish --access public",
-    "publish-minor": "npm version minor && npm publish --access public",
-    "publish-major": "npm version major && npm publish --access public"
+    "start": "./node_modules/.bin/babel src/ -d ./ --presets react --watch -D",
+    "build": "./node_modules/.bin/babel src/ -d ./ --presets react -D",
+    "publish-patch": "npm run build && npm version patch && npm publish --access public",
+    "publish-minor": "npm run build && npm version minor && npm publish --access public",
+    "publish-major": "npm run build && npm version major && npm publish --access public"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-react-native": "^4.0.0",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
@@ -60,8 +61,8 @@
     "redux-form": "^7.2.0",
     "style-loader": "^0.19.1",
     "supports-color": "^5.1.0",
-    "webpack-dev-server": "^2.11.0",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.11.0"
   },
   "keywords": [
     "react",

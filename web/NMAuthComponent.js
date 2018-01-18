@@ -1,88 +1,160 @@
-import React from 'react';
-import { Row, Col, Button, Form, FormGroup, Label, ButtonGroup } from 'reactstrap';
-import { Field, reduxForm } from 'redux-form';
-import connector from './../connector';
-// import './AuthPage.css';
+'use strict';
 
-let SigninFormBase = props => {
-  const {
-    handleSubmit,
-    signInWithGoogle,
-    signUpWithEmail,
-    signInWithEmail,
-    onSignUp,
-    showSignup
-  } = props;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-  const passwordConfirmation = (
-    <FormGroup>
-      <Label for="passwordConfirmation" hidden>Confirm Password</Label>
-      <Field
-        component="input"
-        type="password"
-        name="passwordConfirmation"
-        className="form-control form-control-sm"
-        id="password"
-        placeholder="confirm password"
-      />
-    </FormGroup>
-  )
+var _react = require('react');
 
-  const emailSignIn = (
-    <Row>
-      <Col className="emailSignIn">
-        <Form onSubmit={ showSignup ? signUpWithEmail : signInWithEmail }>
-          <FormGroup>
-            <Label for="email" hidden>Email</Label>
-            <Field
-              component="input"
-              type="email"
-              name="email"
-              className="form-control form-control-sm"
-              id="email"
-              placeholder="email"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="password" hidden>Password</Label>
-            <Field
-              component="input"
-              type="password"
-              name="password"
-              className="form-control form-control-sm"
-              id="password"
-              placeholder="password"
-            />
-          </FormGroup>
-          {showSignup ? passwordConfirmation : ''}
-          <Button className="float-right" color="primary" size="sm" type="submit">Submit</Button>
-        </Form>
-        {showSignup ? '' : <p className="signUpLink">No Account? <a href="#" onClick={onSignUp}>Click here.</a></p>}
-      </Col>
-    </Row>
-  )
+var _react2 = _interopRequireDefault(_react);
 
-    return (
-      <div className="NMAuthComponent">
-        {emailSignIn}
-        <Row>
-          <Col md="1"></Col>
-          <Col md="10" className="socialSignin justify-content-md-center">
-            <p className="instructions">or continue with</p>
-            <ButtonGroup className="social-signing-buttons">
-              <Button size="sm" color="primary" onClick={signInWithGoogle}>Google</Button>{' '}
-              <Button size="sm" color="primary" disabled={true}>Facebook</Button>{' '}
-              <Button size="sm" color="primary" disabled={true}>Twitter</Button>
-            </ButtonGroup>
-          </Col>
-          <Col md="1"></Col>
-        </Row>
-      </div>
-    );
-}
+var _reactstrap = require('reactstrap');
 
-const SigninForm = reduxForm({
+var _reduxForm = require('redux-form');
+
+var _connector = require('./../connector');
+
+var _connector2 = _interopRequireDefault(_connector);
+
+require('./AuthPage.css');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SigninFormBase = function SigninFormBase(props) {
+  var handleSubmit = props.handleSubmit,
+      signInWithGoogle = props.signInWithGoogle,
+      signUpWithEmail = props.signUpWithEmail,
+      signInWithEmail = props.signInWithEmail,
+      onSignUp = props.onSignUp,
+      showSignup = props.showSignup;
+
+
+  var passwordConfirmation = _react2.default.createElement(
+    _reactstrap.FormGroup,
+    null,
+    _react2.default.createElement(
+      _reactstrap.Label,
+      { 'for': 'passwordConfirmation', hidden: true },
+      'Confirm Password'
+    ),
+    _react2.default.createElement(_reduxForm.Field, {
+      component: 'input',
+      type: 'password',
+      name: 'passwordConfirmation',
+      className: 'form-control form-control-sm',
+      id: 'password',
+      placeholder: 'confirm password'
+    })
+  );
+
+  var emailSignIn = _react2.default.createElement(
+    _reactstrap.Row,
+    null,
+    _react2.default.createElement(
+      _reactstrap.Col,
+      { className: 'emailSignIn' },
+      _react2.default.createElement(
+        _reactstrap.Form,
+        { onSubmit: showSignup ? signUpWithEmail : signInWithEmail },
+        _react2.default.createElement(
+          _reactstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            _reactstrap.Label,
+            { 'for': 'email', hidden: true },
+            'Email'
+          ),
+          _react2.default.createElement(_reduxForm.Field, {
+            component: 'input',
+            type: 'email',
+            name: 'email',
+            className: 'form-control form-control-sm',
+            id: 'email',
+            placeholder: 'email'
+          })
+        ),
+        _react2.default.createElement(
+          _reactstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            _reactstrap.Label,
+            { 'for': 'password', hidden: true },
+            'Password'
+          ),
+          _react2.default.createElement(_reduxForm.Field, {
+            component: 'input',
+            type: 'password',
+            name: 'password',
+            className: 'form-control form-control-sm',
+            id: 'password',
+            placeholder: 'password'
+          })
+        ),
+        showSignup ? passwordConfirmation : '',
+        _react2.default.createElement(
+          _reactstrap.Button,
+          { className: 'float-right', color: 'primary', size: 'sm', type: 'submit' },
+          'Submit'
+        )
+      ),
+      showSignup ? '' : _react2.default.createElement(
+        'p',
+        { className: 'signUpLink' },
+        'No Account? ',
+        _react2.default.createElement(
+          'a',
+          { href: '#', onClick: onSignUp },
+          'Click here.'
+        )
+      )
+    )
+  );
+
+  return _react2.default.createElement(
+    'div',
+    { className: 'NMAuthComponent' },
+    emailSignIn,
+    _react2.default.createElement(
+      _reactstrap.Row,
+      null,
+      _react2.default.createElement(_reactstrap.Col, { md: '1' }),
+      _react2.default.createElement(
+        _reactstrap.Col,
+        { md: '10', className: 'socialSignin justify-content-md-center' },
+        _react2.default.createElement(
+          'p',
+          { className: 'instructions' },
+          'or continue with'
+        ),
+        _react2.default.createElement(
+          _reactstrap.ButtonGroup,
+          { className: 'social-signing-buttons' },
+          _react2.default.createElement(
+            _reactstrap.Button,
+            { size: 'sm', color: 'primary', onClick: signInWithGoogle },
+            'Google'
+          ),
+          ' ',
+          _react2.default.createElement(
+            _reactstrap.Button,
+            { size: 'sm', color: 'primary', disabled: true },
+            'Facebook'
+          ),
+          ' ',
+          _react2.default.createElement(
+            _reactstrap.Button,
+            { size: 'sm', color: 'primary', disabled: true },
+            'Twitter'
+          )
+        )
+      ),
+      _react2.default.createElement(_reactstrap.Col, { md: '1' })
+    )
+  );
+};
+
+var SigninForm = (0, _reduxForm.reduxForm)({
   form: 'signIn'
-})(SigninFormBase)
+})(SigninFormBase);
 
-export default connector(SigninForm);
+exports.default = (0, _connector2.default)(SigninForm);
