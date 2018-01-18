@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, ButtonGroup } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import connector from './../connector';
 // import './AuthPage.css';
 
 let SigninFormBase = props => {
@@ -84,4 +85,4 @@ const SigninForm = reduxForm({
   form: 'signIn'
 })(SigninFormBase)
 
-export default SigninForm;
+export default connector(SigninForm);

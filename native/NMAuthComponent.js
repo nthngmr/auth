@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connectStyle, Button, Text, Form, Input, Item, Label } from 'native-base';
+import connector from './../connector';
 
 let renderInput = ({ input, inputProps, label, last, type, meta: { touched, error, warning } }) => {
   var hasError= false;
@@ -66,5 +67,6 @@ const styles = {
   }
 };
 
+const StyledSigninForm = connectStyle('yourTheme.CustomComponent', styles)(reduxForm({form: 'signIn', validate})(SigninForm));
 
-export default connectStyle('yourTheme.CustomComponent', styles)(reduxForm({form: 'signIn', validate})(SigninForm));
+export default connector(StyledSigninForm);

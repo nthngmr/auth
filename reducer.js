@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import {
-  HANDLE_SIGNED_IN, 
-  HANDLE_SIGNED_OUT, 
+  HANDLE_SIGNED_IN,
+  HANDLE_SIGNED_OUT,
   HANDLE_SIGNING_OUT,
-  SIGN_IN_WITH_GOOGLE, 
+  SIGN_IN_WITH_GOOGLE,
   HANDLE_SIGN_IN_FAILURE,
   TOGGLE_SIGNUP
-} from './auth-actions';
+} from './actions';
 
 const initialState = {
   status: 'pending',
@@ -34,14 +34,13 @@ const authReducer = (state = initialState, action) => {
       };
     case HANDLE_SIGNED_OUT:
       return {
-        ...state,
         status: 'unauthenticated'
       };
     case HANDLE_SIGN_IN_FAILURE:
       return {
         ...state,
         status: 'unauthenticated',
-        type: 'HANDLE_SIGN_IN_FAILURE', 
+        type: 'HANDLE_SIGN_IN_FAILURE',
         error: action.error,
         provider: action.provider
       }
