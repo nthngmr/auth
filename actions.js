@@ -40,17 +40,15 @@ export const signInWithEmail = () => {
     let firebase = fb();
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
-      const user = {
+      const info = {
         displayName: result.displayName,
         email: result.email,
-        uid: result.uid,
-        photoUrl: '',
-
+        uid: result.uid
       }
-      return saveUserInfo(user).then(() => {
+      return saveUserInfo(info).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN, 
-          user,
+          user: {info},
           provider: 'email'
         });
       });
@@ -79,10 +77,15 @@ export const signUpWithEmail = () => {
     let state = getState();
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
-      return saveUserInfo(result.user).then(() => {
+      const info = {
+        displayName: result.displayName,
+        email: result.email,
+        uid: result.uid
+      }
+      return saveUserInfo(info).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN, 
-          user: result.user,
+          user: {info},
           provider: 'email'
         });
       });

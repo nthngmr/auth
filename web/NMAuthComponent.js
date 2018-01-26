@@ -97,13 +97,26 @@ var SigninFormBase = function SigninFormBase(props) {
           'Submit'
         )
       ),
-      showSignup ? '' : _react2.default.createElement(
+      showSignup ? _react2.default.createElement(
+        'p',
+        { className: 'signUpLink' },
+        'Have an account? ',
+        _react2.default.createElement(
+          'a',
+          { href: '#', onClick: function onClick() {
+              onSignUp(false);
+            } },
+          'Click here.'
+        )
+      ) : _react2.default.createElement(
         'p',
         { className: 'signUpLink' },
         'No Account? ',
         _react2.default.createElement(
           'a',
-          { href: '#', onClick: onSignUp },
+          { href: '#', onClick: function onClick() {
+              onSignUp(true);
+            } },
           'Click here.'
         )
       )

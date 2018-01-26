@@ -5,7 +5,7 @@ import * as actions from './actions';
 export default connect((state) => ({
   auth: state.auth,
   authPending: state.auth.status === 'pending',
-  showSignup: state.showSignup
+  showSignup: state.auth.showSignup
 }),
 (dispatch, ownProps) => ({
   dispatch,
@@ -20,7 +20,7 @@ export default connect((state) => ({
     event.preventDefault();
     dispatch(actions.signUpWithEmail());
   },
-  onSignup: (show) => {
+  onSignUp: (show) => {
     dispatch(actions.toggleSignup(show));
   }
 }))

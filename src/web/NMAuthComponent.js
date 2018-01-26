@@ -57,7 +57,7 @@ let SigninFormBase = props => {
           {showSignup ? passwordConfirmation : ''}
           <Button className="float-right" color="primary" size="sm" type="submit">Submit</Button>
         </Form>
-        {showSignup ? '' : <p className="signUpLink">No Account? <a href="#" onClick={onSignUp}>Click here.</a></p>}
+        {showSignup ? <p className="signUpLink">Have an account? <a href="#" onClick={() => { onSignUp(false) } }>Click here.</a></p> : <p className="signUpLink">No Account? <a href="#" onClick={() => { onSignUp(true) } }>Click here.</a></p>}
       </Col>
     </Row>
   )
