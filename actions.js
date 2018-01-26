@@ -13,7 +13,6 @@ export const TOGGLE_SIGNUP = 'TOGGLE_SIGNUP';
 
 export const signInWithGoogle = (id) => {
   return (dispatch, getState) => {
-    debugger
     let firebase = fb();
     var provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(provider).then(function(result) {
