@@ -1,11 +1,16 @@
+"use strict";
 
-let FIREBASE;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-const firebase = (firebase) => {
-  if (firebase) {
-    FIREBASE = firebase;
+var FIREBASE = void 0;
+
+var firebase = function firebase(_firebase) {
+  if (_firebase) {
+    FIREBASE = _firebase;
   }
   return FIREBASE;
-}
+};
 
-export default firebase;
+exports.default = firebase;
