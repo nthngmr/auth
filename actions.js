@@ -123,7 +123,7 @@ function saveUserInfo(user) {
     photoUrl: user.photoURL || '',
     uid: user.uid
   };
-  return firebase.firestore().doc('users/' + user.uid).set({ info: info });
+  return firebase.firestore().doc('users/' + user.uid).update({ info: info });
 }
 
 var signOut = exports.signOut = function signOut() {
