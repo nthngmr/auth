@@ -106,7 +106,7 @@ function saveUserInfo(user) {
     photoUrl: user.photoURL || '',
     uid: user.uid
   }
-  return firebase.firestore().doc(`users/${user.uid}`).update({info});
+  return firebase.firestore().doc(`users/${user.uid}`).set({info}, {merge: true});
 }
 
 export const signOut = () => {
