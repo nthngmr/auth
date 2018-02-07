@@ -47,7 +47,7 @@ export const signInWithEmail = () => {
     let firebase = fb();
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
-      const info = {
+      const user = {
         uid: result.uid,
         info: {
           displayName: result.displayName,
@@ -55,7 +55,7 @@ export const signInWithEmail = () => {
           photoUrl: ''
         }
       }
-      return saveUserInfo(info).then(() => {
+      return saveUserInfo(user).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN,
           user,
