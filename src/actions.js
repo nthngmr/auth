@@ -26,14 +26,14 @@ export const signInWithGoogle = (id) => {
       }
       return saveUserInfo(user).then(() => {
         return dispatch({
-          type: HANDLE_SIGNED_IN, 
+          type: HANDLE_SIGNED_IN,
           user,
           provider: 'google'
         });
       });
     }).catch(function(error) {
       return dispatch({
-        type: HANDLE_SIGN_IN_FAILURE, 
+        type: HANDLE_SIGN_IN_FAILURE,
         error,
         provider: 'google'
       });
@@ -57,14 +57,14 @@ export const signInWithEmail = () => {
       }
       return saveUserInfo(info).then(() => {
         return dispatch({
-          type: HANDLE_SIGNED_IN, 
+          type: HANDLE_SIGNED_IN,
           user,
           provider: 'email'
         });
       });
     }).catch(function(error) {
       return dispatch({
-        type: HANDLE_SIGN_IN_FAILURE, 
+        type: HANDLE_SIGN_IN_FAILURE,
         error,
         provider: 'email'
       });
@@ -88,23 +88,23 @@ export const signUpWithEmail = () => {
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
       const user = {
-        uid: result.user.uid,
+        uid: result.uid,
         info: {
-          displayName: result.user.displayName,
-          email: result.user.email,
+          displayName: result.displayName,
+          email: result.email,
           photoUrl: ''
         }
       }
       return saveUserInfo(user).then(() => {
         return dispatch({
-          type: HANDLE_SIGNED_IN, 
+          type: HANDLE_SIGNED_IN,
           user,
           provider: 'email'
         });
       });
     }).catch(function(error) {
       return dispatch({
-        type: HANDLE_SIGN_IN_FAILURE, 
+        type: HANDLE_SIGN_IN_FAILURE,
         error,
         provider: 'email'
       });
