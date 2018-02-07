@@ -104,7 +104,6 @@ var signUpWithEmail = exports.signUpWithEmail = function signUpWithEmail() {
         password = _$get2.password;
 
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
-      debugger;
       var user = {
         uid: result.uid,
         info: {
