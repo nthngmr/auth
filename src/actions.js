@@ -87,6 +87,7 @@ export const signUpWithEmail = () => {
     let state = getState();
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
+      debugger
       const user = {
         uid: result.uid,
         info: {
