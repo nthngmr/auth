@@ -25,10 +25,18 @@ var signInWithGoogle = exports.signInWithGoogle = function signInWithGoogle(id) 
     var firebase = (0, _firebase2.default)();
     var provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(provider).then(function (result) {
-      return saveUserInfo(result.user).then(function () {
+      var user = {
+        uid: result.user.uid,
+        info: {
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoUrl: result.user.photoURL
+        }
+      };
+      return saveUserInfo(user).then(function () {
         return dispatch({
           type: HANDLE_SIGNED_IN,
-          user: result.user,
+          user: user,
           provider: 'google'
         });
       });
@@ -53,14 +61,17 @@ var signInWithEmail = exports.signInWithEmail = function signInWithEmail() {
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
       var info = {
-        displayName: result.displayName,
-        email: result.email,
-        uid: result.uid
+        uid: result.uid,
+        info: {
+          displayName: result.displayName,
+          email: result.email,
+          photoUrl: ''
+        }
       };
       return saveUserInfo(info).then(function () {
         return dispatch({
           type: HANDLE_SIGNED_IN,
-          user: { info: info },
+          user: user,
           provider: 'email'
         });
       });
@@ -93,15 +104,18 @@ var signUpWithEmail = exports.signUpWithEmail = function signUpWithEmail() {
         password = _$get2.password;
 
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
-      var info = {
-        displayName: result.displayName,
-        email: result.email,
-        uid: result.uid
+      var user = {
+        uid: result.user.uid,
+        info: {
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoUrl: ''
+        }
       };
-      return saveUserInfo(info).then(function () {
+      return saveUserInfo(user).then(function () {
         return dispatch({
           type: HANDLE_SIGNED_IN,
-          user: { info: info },
+          user: user,
           provider: 'email'
         });
       });
@@ -117,13 +131,7 @@ var signUpWithEmail = exports.signUpWithEmail = function signUpWithEmail() {
 
 function saveUserInfo(user) {
   var firebase = (0, _firebase2.default)();
-  var info = {
-    name: user.displayName || '',
-    email: user.email,
-    photoUrl: user.photoURL || '',
-    uid: user.uid
-  };
-  return firebase.firestore().doc('users/' + user.uid).set({ info: info }, { merge: true });
+  return firebase.firestore().doc('users/' + user.uid).set(user, { merge: true });
 }
 
 var signOut = exports.signOut = function signOut() {

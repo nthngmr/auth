@@ -16,10 +16,18 @@ export const signInWithGoogle = (id) => {
     let firebase = fb();
     var provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithPopup(provider).then(function(result) {
-      return saveUserInfo(result.user).then(() => {
+      const user = {
+        uid: result.user.uid,
+        info: {
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoUrl: result.user.photoURL
+        }
+      }
+      return saveUserInfo(user).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN, 
-          user: result.user,
+          user,
           provider: 'google'
         });
       });
@@ -40,14 +48,17 @@ export const signInWithEmail = () => {
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
       const info = {
-        displayName: result.displayName,
-        email: result.email,
-        uid: result.uid
+        uid: result.uid,
+        info: {
+          displayName: result.displayName,
+          email: result.email,
+          photoUrl: ''
+        }
       }
       return saveUserInfo(info).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN, 
-          user: {info},
+          user,
           provider: 'email'
         });
       });
@@ -76,15 +87,18 @@ export const signUpWithEmail = () => {
     let state = getState();
     const {email, password}  = _.get(state, 'form.signIn.values', {});
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
-      const info = {
-        displayName: result.displayName,
-        email: result.email,
-        uid: result.uid
+      const user = {
+        uid: result.user.uid,
+        info: {
+          displayName: result.user.displayName,
+          email: result.user.email,
+          photoUrl: ''
+        }
       }
-      return saveUserInfo(info).then(() => {
+      return saveUserInfo(user).then(() => {
         return dispatch({
           type: HANDLE_SIGNED_IN, 
-          user: {info},
+          user,
           provider: 'email'
         });
       });
@@ -100,13 +114,7 @@ export const signUpWithEmail = () => {
 
 function saveUserInfo(user) {
   let firebase = fb();
-  let info = {
-    name: user.displayName || '',
-    email: user.email,
-    photoUrl: user.photoURL || '',
-    uid: user.uid
-  }
-  return firebase.firestore().doc(`users/${user.uid}`).set({info}, {merge: true});
+  return firebase.firestore().doc(`users/${user.uid}`).set(user, {merge: true});
 }
 
 export const signOut = () => {
