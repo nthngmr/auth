@@ -60,7 +60,7 @@ var signInWithEmail = exports.signInWithEmail = function signInWithEmail() {
         password = _$get.password;
 
     return firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
-      var info = {
+      var user = {
         uid: result.uid,
         info: {
           displayName: result.displayName,
@@ -68,7 +68,7 @@ var signInWithEmail = exports.signInWithEmail = function signInWithEmail() {
           photoUrl: ''
         }
       };
-      return saveUserInfo(info).then(function () {
+      return saveUserInfo(user).then(function () {
         return dispatch({
           type: HANDLE_SIGNED_IN,
           user: user,
@@ -105,10 +105,10 @@ var signUpWithEmail = exports.signUpWithEmail = function signUpWithEmail() {
 
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
       var user = {
-        uid: result.user.uid,
+        uid: result.uid,
         info: {
-          displayName: result.user.displayName,
-          email: result.user.email,
+          displayName: result.displayName,
+          email: result.email,
           photoUrl: ''
         }
       };
