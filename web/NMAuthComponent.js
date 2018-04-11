@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -26,7 +28,9 @@ var SigninFormBase = function SigninFormBase(props) {
       signUpWithEmail = props.signUpWithEmail,
       signInWithEmail = props.signInWithEmail,
       onSignUp = props.onSignUp,
-      showSignup = props.showSignup;
+      showSignup = props.showSignup,
+      buttonProps = props.buttonProps,
+      size = props.size;
 
 
   var passwordConfirmation = _react2.default.createElement(
@@ -41,11 +45,13 @@ var SigninFormBase = function SigninFormBase(props) {
       component: 'input',
       type: 'password',
       name: 'passwordConfirmation',
-      className: 'form-control form-control-sm',
+      className: 'form-control form-control-' + (size || 'md'),
       id: 'password',
       placeholder: 'confirm password'
     })
   );
+
+  var mergedButtonProps = _.merge({ size: '' + (size || 'md'), color: 'primary' }, buttonProps || {});
 
   var emailSignIn = _react2.default.createElement(
     _reactstrap.Row,
@@ -68,7 +74,7 @@ var SigninFormBase = function SigninFormBase(props) {
             component: 'input',
             type: 'email',
             name: 'email',
-            className: 'form-control form-control-sm',
+            className: 'form-control form-control-' + (size || 'md'),
             id: 'email',
             placeholder: 'email'
           })
@@ -85,7 +91,7 @@ var SigninFormBase = function SigninFormBase(props) {
             component: 'input',
             type: 'password',
             name: 'password',
-            className: 'form-control form-control-sm',
+            className: 'form-control form-control-' + (size || 'md'),
             id: 'password',
             placeholder: 'password'
           })
@@ -93,7 +99,7 @@ var SigninFormBase = function SigninFormBase(props) {
         showSignup ? passwordConfirmation : '',
         _react2.default.createElement(
           _reactstrap.Button,
-          { className: 'float-right', color: 'primary', size: 'sm', type: 'submit' },
+          _extends({ className: 'float-right' }, mergedButtonProps, { type: 'submit' }),
           'Submit'
         )
       ),
@@ -130,38 +136,42 @@ var SigninFormBase = function SigninFormBase(props) {
     _react2.default.createElement(
       _reactstrap.Row,
       null,
-      _react2.default.createElement(_reactstrap.Col, { md: '1' }),
       _react2.default.createElement(
         _reactstrap.Col,
-        { md: '10', className: 'socialSignin justify-content-md-center' },
+        null,
         _react2.default.createElement(
           'p',
           { className: 'instructions' },
           'or continue with'
-        ),
+        )
+      )
+    ),
+    _react2.default.createElement(
+      _reactstrap.Row,
+      null,
+      _react2.default.createElement(
+        _reactstrap.Col,
+        { className: 'd-flex justify-content-center' },
         _react2.default.createElement(
           _reactstrap.ButtonGroup,
           { className: 'social-signing-buttons' },
           _react2.default.createElement(
             _reactstrap.Button,
-            { size: 'sm', color: 'primary', onClick: signInWithGoogle },
+            _extends({}, mergedButtonProps, { onClick: signInWithGoogle }),
             'Google'
           ),
-          ' ',
           _react2.default.createElement(
             _reactstrap.Button,
-            { size: 'sm', color: 'primary', disabled: true },
+            _extends({}, mergedButtonProps, { disabled: true }),
             'Facebook'
           ),
-          ' ',
           _react2.default.createElement(
             _reactstrap.Button,
-            { size: 'sm', color: 'primary', disabled: true },
+            _extends({}, mergedButtonProps, { disabled: true }),
             'Twitter'
           )
         )
-      ),
-      _react2.default.createElement(_reactstrap.Col, { md: '1' })
+      )
     )
   );
 };

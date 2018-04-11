@@ -11,7 +11,9 @@ let SigninFormBase = props => {
     signUpWithEmail,
     signInWithEmail,
     onSignUp,
-    showSignup
+    showSignup,
+    buttonProps,
+    size
   } = props;
 
   const passwordConfirmation = (
@@ -21,12 +23,14 @@ let SigninFormBase = props => {
         component="input"
         type="password"
         name="passwordConfirmation"
-        className="form-control form-control-sm"
+        className={`form-control form-control-${size || 'md'}`}
         id="password"
         placeholder="confirm password"
       />
     </FormGroup>
   )
+
+  const mergedButtonProps = _.merge({size: `${size || 'md'}`, color: 'primary'}, buttonProps || {})
 
   const emailSignIn = (
     <Row>
@@ -38,7 +42,7 @@ let SigninFormBase = props => {
               component="input"
               type="email"
               name="email"
-              className="form-control form-control-sm"
+              className={`form-control form-control-${size || 'md'}`}
               id="email"
               placeholder="email"
             />
@@ -49,13 +53,13 @@ let SigninFormBase = props => {
               component="input"
               type="password"
               name="password"
-              className="form-control form-control-sm"
+              className={`form-control form-control-${size || 'md'}`}
               id="password"
               placeholder="password"
             />
           </FormGroup>
           {showSignup ? passwordConfirmation : ''}
-          <Button className="float-right" color="primary" size="sm" type="submit">Submit</Button>
+          <Button className="float-right" {...mergedButtonProps} type="submit">Submit</Button>
         </Form>
         {showSignup ? <p className="signUpLink">Have an account? <a href="#" onClick={() => { onSignUp(false) } }>Click here.</a></p> : <p className="signUpLink">No Account? <a href="#" onClick={() => { onSignUp(true) } }>Click here.</a></p>}
       </Col>
@@ -66,16 +70,18 @@ let SigninFormBase = props => {
       <div className="NMAuthComponent">
         {emailSignIn}
         <Row>
-          <Col md="1"></Col>
-          <Col md="10" className="socialSignin justify-content-md-center">
+          <Col>
             <p className="instructions">or continue with</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="d-flex justify-content-center">
             <ButtonGroup className="social-signing-buttons">
-              <Button size="sm" color="primary" onClick={signInWithGoogle}>Google</Button>{' '}
-              <Button size="sm" color="primary" disabled={true}>Facebook</Button>{' '}
-              <Button size="sm" color="primary" disabled={true}>Twitter</Button>
+              <Button {...mergedButtonProps} onClick={signInWithGoogle}>Google</Button>
+              <Button {...mergedButtonProps} disabled={true}>Facebook</Button>
+              <Button {...mergedButtonProps} disabled={true}>Twitter</Button>
             </ButtonGroup>
           </Col>
-          <Col md="1"></Col>
         </Row>
       </div>
     );
