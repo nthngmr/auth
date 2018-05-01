@@ -1,10 +1,12 @@
-.NMAuthComponent .signUpLink {
+.NMAuthComponent .signUpLink,
+.NMAuthComponent .passwordResetLink {
   font-size: 12px;
   text-align: left;
+  margin-bottom: 0px;
 }
 
-.NMAuthComponent .social-signing-buttons {
-
+.NMAuthComponent .password-reset-instructions {
+  text-align: center;
 }
 
 .NMAuthComponent .emailSignIn {

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.signOut = exports.signUpWithEmail = exports.toggleSignup = exports.signInWithEmail = exports.signInWithGoogle = exports.TOGGLE_SIGNUP = exports.SIGN_UP_WITH_EMAIL = exports.SIGN_IN_WITH_EMAIL = exports.SIGN_IN_WITH_GOOGLE = exports.HANDLE_SIGN_IN_FAILURE = exports.HANDLE_SIGNING_OUT = exports.HANDLE_SIGNED_OUT = exports.HANDLE_SIGNED_IN = undefined;
+exports.signOut = exports.updatePassword = exports.togglePasswordUpdate = exports.resetPassword = exports.togglePasswordReset = exports.signUpWithEmail = exports.toggleSignup = exports.signInWithEmail = exports.signInWithGoogle = exports.TOGGLE_PASSWORD_UPDATE = exports.PASSWORD_UPDATED = exports.HANDLE_PASSWORD_UPDATE_FAILURE = exports.TOGGLE_PASSWORD_RESET = exports.HANDLE_PASSWORD_RESET_FAILURE = exports.PASSWORD_RESET_SENT = exports.TOGGLE_SIGNUP = exports.SIGN_UP_WITH_EMAIL = exports.SIGN_IN_WITH_EMAIL = exports.SIGN_IN_WITH_GOOGLE = exports.HANDLE_SIGN_IN_FAILURE = exports.HANDLE_SIGNING_OUT = exports.HANDLE_SIGNED_OUT = exports.HANDLE_SIGNED_IN = undefined;
 
 var _firebase = require('./firebase');
 
@@ -19,6 +19,12 @@ var SIGN_IN_WITH_GOOGLE = exports.SIGN_IN_WITH_GOOGLE = 'SIGN_IN_WITH_GOOGLE';
 var SIGN_IN_WITH_EMAIL = exports.SIGN_IN_WITH_EMAIL = 'SIGN_IN_WITH_EMAIL';
 var SIGN_UP_WITH_EMAIL = exports.SIGN_UP_WITH_EMAIL = 'SIGN_UP_WITH_EMAIL';
 var TOGGLE_SIGNUP = exports.TOGGLE_SIGNUP = 'TOGGLE_SIGNUP';
+var PASSWORD_RESET_SENT = exports.PASSWORD_RESET_SENT = 'PASSWORD_RESET_SENT';
+var HANDLE_PASSWORD_RESET_FAILURE = exports.HANDLE_PASSWORD_RESET_FAILURE = 'HANDLE_PASSWORD_RESET_FAILURE';
+var TOGGLE_PASSWORD_RESET = exports.TOGGLE_PASSWORD_RESET = 'TOGGLE_PASSWORD_RESET';
+var HANDLE_PASSWORD_UPDATE_FAILURE = exports.HANDLE_PASSWORD_UPDATE_FAILURE = 'HANDLE_PASSWORD_UPDATE_FAILURE';
+var PASSWORD_UPDATED = exports.PASSWORD_UPDATED = 'PASSWORD_UPDATED';
+var TOGGLE_PASSWORD_UPDATE = exports.TOGGLE_PASSWORD_UPDATE = 'TOGGLE_PASSWORD_UPDATE';
 
 var signInWithGoogle = exports.signInWithGoogle = function signInWithGoogle(id) {
   return function (dispatch, getState) {
@@ -124,6 +130,66 @@ var signUpWithEmail = exports.signUpWithEmail = function signUpWithEmail() {
         type: HANDLE_SIGN_IN_FAILURE,
         error: error,
         provider: 'email'
+      });
+    });
+  };
+};
+
+var togglePasswordReset = exports.togglePasswordReset = function togglePasswordReset(show) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: TOGGLE_PASSWORD_RESET,
+      show: show
+    });
+  };
+};
+
+var resetPassword = exports.resetPassword = function resetPassword() {
+  return function (dispatch, getState) {
+    var firebase = (0, _firebase2.default)();
+    var state = getState();
+
+    var _$get3 = _.get(state, 'form.signIn.values', {}),
+        email = _$get3.email;
+
+    return firebase.auth().sendPasswordResetEmail(email).then(function () {
+      return dispatch({
+        type: PASSWORD_RESET_SENT
+      });
+    }).catch(function (error) {
+      return dispatch({
+        type: HANDLE_PASSWORD_RESET_FAILURE,
+        error: error
+      });
+    });
+  };
+};
+
+var togglePasswordUpdate = exports.togglePasswordUpdate = function togglePasswordUpdate(show, code) {
+  return function (dispatch, getState) {
+    dispatch({
+      type: TOGGLE_PASSWORD_UPDATE,
+      show: show,
+      code: code
+    });
+  };
+};
+
+var updatePassword = exports.updatePassword = function updatePassword(newPassword) {
+  return function (dispatch, getState) {
+    var firebase = (0, _firebase2.default)();
+    var state = getState();
+    var code = _.get(state, 'auth.passwordReset.code');
+    var password = _.get(state, 'form.signIn.values.password', newPassword);
+    var promise = code ? firebase.auth().confirmPasswordReset(code, password) : firebase.auth().currentUser.updatePassword(password);
+    return promise.then(function () {
+      return dispatch({
+        type: PASSWORD_UPDATED
+      });
+    }).catch(function (error) {
+      return dispatch({
+        type: HANDLE_PASSWORD_UPDATE_FAILURE,
+        error: error
       });
     });
   };

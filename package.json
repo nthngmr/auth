@@ -68,5 +68,7 @@
     "react",
     "react-component"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "redux-form-validators": "^2.4.3"
+  }
 }

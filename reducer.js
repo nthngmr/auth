@@ -16,7 +16,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var initialState = {
   status: 'pending',
-  showSignup: false
+  showSignup: false,
+  passwordReset: {
+    show: false,
+    status: 'unsent',
+    updating: false
+  }
 };
 
 var authReducer = function authReducer() {
@@ -52,6 +57,54 @@ var authReducer = function authReducer() {
     case _actions.TOGGLE_SIGNUP:
       return _extends({}, state, {
         showSignup: action.show
+      });
+    case _actions.TOGGLE_PASSWORD_RESET:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          show: action.show,
+          status: 'unsent',
+          updating: false,
+          error: {}
+        })
+      });
+    case _actions.PASSWORD_RESET_SENT:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          status: 'sent'
+        })
+      });
+    case _actions.HANDLE_PASSWORD_RESET_FAILURE:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          status: 'error',
+          error: action.error
+        })
+      });
+    case _actions.TOGGLE_PASSWORD_UPDATE:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          show: action.show,
+          updating: true,
+          status: 'unsent',
+          code: action.code
+        })
+      });
+    case _actions.PASSWORD_UPDATED:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          status: 'updated',
+          updating: false,
+          show: false,
+          code: null,
+          error: {}
+        })
+      });
+    case _actions.HANDLE_PASSWORD_UPDATE_FAILURE:
+      return _extends({}, state, {
+        passwordReset: _extends({}, state.passwordReset, {
+          status: 'error',
+          error: action.error
+        })
       });
     default:
       return state;
